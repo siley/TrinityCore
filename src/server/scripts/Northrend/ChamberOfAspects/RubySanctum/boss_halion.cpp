@@ -578,6 +578,15 @@ class boss_twilight_halion : public CreatureScript
                         break;
                 }
             }
+            
+            void UpdateAI(uint32 diff) override
+            {
+                events.Update(diff);
+                
+                while (uint32 eventId = events.ExecuteEvent())
+                    ExecuteEvent(eventId);
+                generic_halionAI::UpdateAI(diff);
+            }
 
         private:
             EventMap events;
